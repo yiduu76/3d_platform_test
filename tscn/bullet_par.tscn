@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://xlfpjl1og8t1"]
+
+[sub_resource type="Curve" id="Curve_70s7a"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8uxci"]
+curve = SubResource("Curve_70s7a")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uwodj"]
+emission_shape = 1
+emission_sphere_radius = 0.2
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 6.0
+damping_min = 7.0
+damping_max = 9.0
+scale_curve = SubResource("CurveTexture_8uxci")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ow6al"]
+albedo_color = Color(0.0666667, 1, 1, 1)
+metallic = 0.1
+roughness = 0.3
+emission_enabled = true
+emission = Color(0, 0.596078, 0.917647, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_23yok"]
+material = SubResource("StandardMaterial3D_ow6al")
+radius = 0.05
+height = 0.1
+radial_segments = 16
+rings = 8
+
+[node name="bullet_par" type="GPUParticles3D"]
+emitting = false
+amount = 14
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_uwodj")
+draw_pass_1 = SubResource("SphereMesh_23yok")
